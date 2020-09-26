@@ -27,11 +27,21 @@ public class Ncyclo {
         return receivers;
     }
 
-    public static void send(Object data, int maximumTransfers) {
+    public static void send(Object data, int maximumTransfers, String id) {
         Bridge bridge = new Bridge(data);
         for (NcycloReceiver receiver : Ncyclo.getReceivers()) {
-            bridge.send(receiver, maximumTransfers);
+            if (!receiver.getId().equals(id) || id.equals("")) {
+                bridge.send(receiver, maximumTransfers);
+            }
         }
+    }
+
+    public static void send(Object data, String id) {
+        send(data, 0, id);
+    }
+
+    public static void send(Object data, int maximumTransfers) {
+        send(data, maximumTransfers, "");
     }
 
     public static void send(Object data) {
