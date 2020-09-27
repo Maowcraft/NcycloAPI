@@ -1,6 +1,6 @@
 import maow.ncycloapi.Receiver;
 
-public class TestReceiver implements Receiver {
+public class TestReceiver extends Receiver {
     @Override
     public String getReceiverName() {
         return "test:receiver";

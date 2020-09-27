@@ -3,12 +3,13 @@ package maow.ncycloapi;
 import java.io.*;
 import java.net.Socket;
 
-public interface Receiver {
-    String getReceiverName();
+public abstract class Receiver implements BaseReceiver {
+    private boolean alive = true;
 
-    default void start() {
+    @Override
+    public void start() {
         Thread thread = new Thread(() -> {
-            while (true) {
+            while (alive) {
                 try (Socket clientSocket = new Socket("localhost", Ncyclo.PORT)) {
                     OutputStream toServer = clientSocket.getOutputStream();
                     InputStream fromServer = clientSocket.getInputStream();
@@ -30,5 +31,8 @@ public interface Receiver {
         thread.start();
     }
 
-    void onReceive(String data);
+    @Override
+    public void end() {
+        alive = false;
+    }
 }
