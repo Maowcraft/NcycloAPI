@@ -19,6 +19,7 @@ public class Server {
             } else {
                 out.writeUTF(data);
             }
+            socket.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
