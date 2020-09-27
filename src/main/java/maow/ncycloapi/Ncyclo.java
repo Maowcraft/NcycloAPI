@@ -1,16 +1,11 @@
 package maow.ncycloapi;
 
-import maow.ncycloapi.server.Server;
-
 public class Ncyclo {
     public static final int PORT = 63540;
     private static Server server;
 
     public static void init() {
-        new Thread(() -> {
-            server = new Server();
-            server.start();
-        }).start();
+        new Thread(() -> server = new Server()).start();
     }
 
     public static void send(String data, String... exclusions) {
@@ -27,9 +22,5 @@ public class Ncyclo {
                 }
             }
         }
-    }
-
-    public static Server getServer() {
-        return server;
     }
 }

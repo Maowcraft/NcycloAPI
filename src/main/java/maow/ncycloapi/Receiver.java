@@ -8,8 +8,7 @@ public interface Receiver {
 
     default void start() {
         Thread thread = new Thread(() -> {
-            boolean scanning = true;
-            while (scanning) {
+            while (true) {
                 try (Socket clientSocket = new Socket("localhost", Ncyclo.PORT)) {
                     OutputStream toServer = clientSocket.getOutputStream();
                     InputStream fromServer = clientSocket.getInputStream();
@@ -18,9 +17,9 @@ public interface Receiver {
                     out.writeUTF(getReceiverName());
                     String data = in.readUTF();
                     if (!data.equals("ncyclo:server:exclusion_found")) onReceive(data);
-                    scanning = false;
                 } catch (IOException e) {
                     try {
+                        //noinspection BusyWait
                         Thread.sleep(5000);
                     } catch (InterruptedException ie) {
                         ie.printStackTrace();
