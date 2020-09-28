@@ -1,2 +1,2 @@
 # NcycloAPI
-API-2-API Communication Middle-Man Java Library
+Easy-to-use socket-based Application-2-Application Java Library 
