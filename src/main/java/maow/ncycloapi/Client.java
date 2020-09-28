@@ -34,20 +34,11 @@ public class Client {
     public void start() {
         while (true) {
             try (Socket socket = new Socket("localhost", Ncyclo.PORT)) {
-                OutputStream toServer = socket.getOutputStream();
-                DataOutputStream out = new DataOutputStream(toServer);
-                StringBuilder sb = new StringBuilder();
-                for (Receiver receiver : receivers) {
-                    sb.append(receiver.getName()).append(",");
-                }
-                out.writeUTF(sb.toString());
                 InputStream fromServer = socket.getInputStream();
                 DataInputStream in = new DataInputStream(fromServer);
                 String data = in.readUTF();
-                if (!data.equals("ncyclo:server:skip")) {
-                    for (Receiver receiver : receivers) {
-                        receiver.onReceive(data);
-                    }
+                for (Receiver receiver : receivers) {
+                    receiver.onReceive(data);
                 }
             } catch (IOException e) {
                 try {
