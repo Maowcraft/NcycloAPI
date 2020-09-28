@@ -1,5 +1,5 @@
 # NcycloAPI
-API-2-API Communication Middle-Man Java Library
+Easy-to-use socket-based Application-2-Application Java Library 
 
 
 This is the 2.4.0 build of Ncyclo, it still includes the Exclusion code. This is here in case you rely on it, otherwise, use 2.5.0.
